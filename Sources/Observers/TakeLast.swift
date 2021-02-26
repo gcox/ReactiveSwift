@@ -1,5 +1,5 @@
 extension Operators {
-	internal class TakeLast<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class TakeLast<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let count: Int
 		var buffer: [Value] = []

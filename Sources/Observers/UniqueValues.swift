@@ -1,5 +1,5 @@
 extension Operators {
-	internal class UniqueValues<Value, Identity: Hashable, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class UniqueValues<Value, Identity: Hashable, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let extract: (Value) -> Identity
 

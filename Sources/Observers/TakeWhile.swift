@@ -1,5 +1,5 @@
 extension Operators {
-	internal class TakeWhile<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class TakeWhile<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let shouldContinue: (Value) -> Bool
 

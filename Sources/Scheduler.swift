@@ -68,7 +68,7 @@ public protocol DateScheduler: Scheduler {
 }
 
 /// A scheduler that performs all work synchronously.
-public class ImmediateScheduler: Scheduler {
+public final class ImmediateScheduler: Scheduler {
 	public init() {}
 
 	/// Immediately calls passed in `action`.
@@ -89,7 +89,7 @@ public class ImmediateScheduler: Scheduler {
 /// If the caller is already running on the main queue when an action is
 /// scheduled, it may be run synchronously. However, ordering between actions
 /// will always be preserved.
-public class UIScheduler: Scheduler {
+public final class UIScheduler: Scheduler {
 	private static let dispatchSpecificKey = DispatchSpecificKey<UInt8>()
 	private static let dispatchSpecificValue = UInt8.max
 	private static var __once: () = {
@@ -181,7 +181,7 @@ public class UIScheduler: Scheduler {
 /// based on the identity of the wrapper object rather than the wrapped
 /// `DispatchSourceTimer`, so two wrappers wrapping the same timer will *not*
 /// be equal.
-private class DispatchSourceTimerWrapper: Hashable {
+private final class DispatchSourceTimerWrapper: Hashable {
 	private let value: DispatchSourceTimer
 	
 	#if swift(>=4.1.50)
@@ -205,7 +205,7 @@ private class DispatchSourceTimerWrapper: Hashable {
 }
 
 /// A scheduler backed by a serial GCD queue.
-public class QueueScheduler: DateScheduler {
+public final class QueueScheduler: DateScheduler {
 	/// A singleton `QueueScheduler` that always targets the main thread's GCD
 	/// queue.
 	///
@@ -389,8 +389,8 @@ public class QueueScheduler: DateScheduler {
 }
 
 /// A scheduler that implements virtualized time, for use in testing.
-public class TestScheduler: DateScheduler {
-	private class ScheduledAction {
+public final class TestScheduler: DateScheduler {
+	private final class ScheduledAction {
 		let date: Date
 		let action: () -> Void
 

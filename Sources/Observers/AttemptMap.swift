@@ -1,5 +1,5 @@
 extension Operators {
-	internal class AttemptMap<InputValue, OutputValue, Error: Swift.Error>: Observer<InputValue, Error> {
+	internal final class AttemptMap<InputValue, OutputValue, Error: Swift.Error>: Observer<InputValue, Error> {
 		let downstream: Observer<OutputValue, Error>
 		let transform: (InputValue) -> Result<OutputValue, Error>
 

@@ -39,7 +39,7 @@ extension UnsafeAtomicState where State == DisposableState {
 }
 
 /// A disposable that does not have side effect upon disposal.
-internal class _SimpleDisposable: Disposable {
+internal final class _SimpleDisposable: Disposable {
 	private let state = UnsafeAtomicState<DisposableState>(.active)
 
 	var isDisposed: Bool {
@@ -56,7 +56,7 @@ internal class _SimpleDisposable: Disposable {
 }
 
 /// A disposable that has already been disposed.
-internal class NopDisposable: Disposable {
+internal final class NopDisposable: Disposable {
 	static let shared = NopDisposable()
 	var isDisposed = true
 	func dispose() {}
@@ -64,8 +64,8 @@ internal class NopDisposable: Disposable {
 }
 
 /// A type-erased disposable that forwards operations to an underlying disposable.
-public class AnyDisposable: Disposable {
-	private class ActionDisposable: Disposable {
+public final class AnyDisposable: Disposable {
+	private final class ActionDisposable: Disposable {
 		let state: UnsafeAtomicState<DisposableState>
 		var action: (() -> Void)?
 
@@ -123,7 +123,7 @@ public class AnyDisposable: Disposable {
 }
 
 /// A disposable that will dispose of any number of other disposables.
-public class CompositeDisposable: Disposable {
+public final class CompositeDisposable: Disposable {
 	private let disposables: Atomic<Bag<Disposable>?>
 	private var state: UnsafeAtomicState<DisposableState>
 
@@ -253,7 +253,7 @@ public class CompositeDisposable: Disposable {
 
 /// A disposable that, upon deinitialization, will automatically dispose of
 /// its inner disposable.
-public class ScopedDisposable<Inner: Disposable>: Disposable {
+public final class ScopedDisposable<Inner: Disposable>: Disposable {
 	/// The disposable which will be disposed when the ScopedDisposable
 	/// deinitializes.
 	public let inner: Inner
@@ -332,7 +332,7 @@ extension ScopedDisposable where Inner == CompositeDisposable {
 
 /// A disposable that disposes of its wrapped disposable, and allows its
 /// wrapped disposable to be replaced.
-public class SerialDisposable: Disposable {
+public final class SerialDisposable: Disposable {
 	private let _inner: Atomic<Disposable?>
 	private var state: UnsafeAtomicState<DisposableState>
 

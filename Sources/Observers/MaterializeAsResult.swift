@@ -1,5 +1,5 @@
 extension Operators {
-	internal class MaterializeAsResult<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class MaterializeAsResult<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Result<Value, Error>, Never>
 
 		init(downstream: Observer<Result<Value, Error>, Never>) {

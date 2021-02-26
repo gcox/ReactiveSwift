@@ -16,7 +16,7 @@ import Foundation
 /// `Action` and the external input from `apply()`.
 ///
 /// `Action` enforces serial execution, and disables the `Action` during the execution.
-public class Action<Input, Output, Error: Swift.Error> {
+public final class Action<Input, Output, Error: Swift.Error> {
 	private struct ActionState<Value> {
 		var isEnabled: Bool {
 			return isUserEnabled && !isExecuting

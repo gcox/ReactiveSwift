@@ -2,7 +2,7 @@ import Nimble
 import Quick
 @testable import ReactiveSwift
 
-private class TestExtensionProvider: ReactiveExtensionsProvider {
+private final class TestExtensionProvider: ReactiveExtensionsProvider {
 	let instanceProperty = "instance"
 	static let staticProperty = "static"
 }

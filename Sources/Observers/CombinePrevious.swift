@@ -1,5 +1,5 @@
 extension Operators {
-	internal class CombinePrevious<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class CombinePrevious<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<(Value, Value), Error>
 		var previous: Value?
 

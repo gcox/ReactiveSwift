@@ -1,5 +1,5 @@
 extension Operators {
-	internal class CompactMap<InputValue, OutputValue, Error: Swift.Error>: Observer<InputValue, Error> {
+	internal final class CompactMap<InputValue, OutputValue, Error: Swift.Error>: Observer<InputValue, Error> {
 		let downstream: Observer<OutputValue, Error>
 		let transform: (InputValue) -> OutputValue?
 		

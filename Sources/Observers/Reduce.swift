@@ -1,5 +1,5 @@
 extension Operators {
-	internal class Reduce<Value, Result, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class Reduce<Value, Result, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Result, Error>
 		let nextPartialResult: (inout Result, Value) -> Void
 		var accumulator: Result

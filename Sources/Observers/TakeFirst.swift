@@ -1,5 +1,5 @@
 extension Operators {
-	internal class TakeFirst<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class TakeFirst<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let count: Int
 		var taken: Int = 0

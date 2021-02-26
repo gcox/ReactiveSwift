@@ -16,7 +16,7 @@
 /// root.value = "🎃"
 /// outer.result.value        // `.invalid("🎃", .outerInvalid)`
 /// ```
-public class ValidatingProperty<Value, ValidationError: Swift.Error>: MutablePropertyProtocol {
+public final class ValidatingProperty<Value, ValidationError: Swift.Error>: MutablePropertyProtocol {
 	private let getter: () -> Value
 	private let setter: (Value) -> Void
 

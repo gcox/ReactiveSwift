@@ -513,7 +513,7 @@ extension PropertyProtocol where Value == Bool {
 ///
 /// Note that composed properties do not retain any of its sources.
 @propertyWrapper
-public class Property<Value>: PropertyProtocol {
+public final class Property<Value>: PropertyProtocol {
 	private let _value: () -> Value
 
 	/// The current value of the property.
@@ -703,7 +703,7 @@ extension Property where Value: OptionalProtocol {
 ///
 /// Instances of this class are thread-safe.
 @propertyWrapper
-public class MutableProperty<Value>: ComposableMutablePropertyProtocol {
+public final class MutableProperty<Value>: ComposableMutablePropertyProtocol {
 	private let token: Lifetime.Token
 	private let observer: Signal<Value, Never>.Observer
 	private let box: PropertyBox<Value>
@@ -850,7 +850,7 @@ internal struct PropertyStorage<Value> {
 ///
 /// The requirement of a `Value?` storage from composed properties prevents further
 /// implementation sharing with `MutableProperty`.
-private class PropertyBox<Value> {
+private final class PropertyBox<Value> {
 
 	private let lock: Lock.PthreadLock
 	fileprivate var _value: Value

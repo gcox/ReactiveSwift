@@ -110,7 +110,7 @@ internal class Lock {
 	@available(macOS 10.12, *)
 	@available(tvOS 10.0, *)
 	@available(watchOS 3.0, *)
-	internal class UnfairLock: Lock {
+	internal final class UnfairLock: Lock {
 		private let _lock: os_unfair_lock_t
 
 		override init() {
@@ -138,7 +138,7 @@ internal class Lock {
 	}
 	#endif
 
-	internal class PthreadLock: Lock {
+	internal final class PthreadLock: Lock {
 		private let _lock: UnsafeMutablePointer<pthread_mutex_t>
 
 		init(recursive: Bool = false) {
@@ -213,7 +213,7 @@ internal class Lock {
 }
 
 /// An atomic variable.
-public class Atomic<Value> {
+public final class Atomic<Value> {
 	private let lock: Lock
 	private var _value: Value
 

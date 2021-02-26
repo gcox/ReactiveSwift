@@ -1,5 +1,5 @@
 extension Operators {
-	internal class SkipFirst<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class SkipFirst<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let count: Int
 		var skipped: Int = 0

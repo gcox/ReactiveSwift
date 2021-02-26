@@ -1,5 +1,5 @@
 extension Operators {
-	internal class Filter<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal final class Filter<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let predicate: (Value) -> Bool
 		

@@ -10,7 +10,7 @@ import ReactiveSwift
 private let lifetimeKey = UnsafeMutablePointer<UInt8>.allocate(capacity: 1)
 private let pressedKey = UnsafeMutablePointer<UInt8>.allocate(capacity: 1)
 
-public class CocoaTarget {
+public final class CocoaTarget {
 	let _execute: (Any) -> Void
 
 	init(_ body: @escaping (Any) -> Void) {
@@ -22,7 +22,7 @@ public class CocoaTarget {
 	}
 }
 
-public class CocoaAction {
+public final class CocoaAction {
 	let _execute: () -> Void
 	let isEnabled: Property<Bool>
 
