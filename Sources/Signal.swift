@@ -17,7 +17,7 @@ import Dispatch
 /// A Signal is kept alive until either of the following happens:
 ///    1. its input observer receives a terminating event; or
 ///    2. it has no active observers, and is not being retained.
-public final class Signal<Value, Error: Swift.Error> {
+public class Signal<Value, Error: Swift.Error> {
 	/// The `Signal` core which manages the event stream.
 	///
 	/// A `Signal` is the externally retained shell of the `Signal` core. The separation
@@ -45,7 +45,7 @@ public final class Signal<Value, Error: Swift.Error> {
 	/// ```
 	private let core: Core
 
-	private final class Core {
+	private class Core {
 		/// The disposable associated with the signal.
 		///
 		/// Disposing of `disposable` is assumed to remove the generator
@@ -376,7 +376,7 @@ public final class Signal<Value, Error: Swift.Error> {
 extension Signal {
 	/// A Signal that never sends any events to its observers.
 	public static var never: Signal {
-		return self.init { observer, lifetime in
+    return .init { observer, lifetime in
 			// If `observer` deinitializes, the `Signal` would interrupt which is
 			// undesirable for `Signal.never`.
 			lifetime.observeEnded { _ = observer }
@@ -385,7 +385,7 @@ extension Signal {
 
 	/// A Signal that completes immediately without emitting any value.
 	public static var empty: Signal {
-		return self.init { observer, _ in
+		return .init { observer, _ in
 			observer.sendCompleted()
 		}
 	}
@@ -406,7 +406,7 @@ extension Signal {
 	public static func pipe(disposable: Disposable? = nil) -> (output: Signal, input: Observer) {
 		var observer: Observer!
 
-		let signal = self.init { innerObserver, lifetime in
+		let signal = Signal { innerObserver, lifetime in
 			observer = innerObserver
 			lifetime += disposable
 		}
@@ -1694,7 +1694,7 @@ extension Signal {
 	// The strategies do not unique the delivery of `completed`, since `Signal` already
 	// guarantees that no event would ever be delivered after a terminal event.
 
-	private final class CombineLatestStrategy: SignalAggregateStrategy {
+	private class CombineLatestStrategy: SignalAggregateStrategy {
 		private enum Placeholder {
 			case none
 		}
@@ -1747,7 +1747,7 @@ extension Signal {
 			}
 		}
 
-		init(count: Int, action: @escaping (AggregateStrategyEvent) -> Void) {
+    required init(count: Int, action: @escaping (AggregateStrategyEvent) -> Void) {
 			self.count = count
 			self.lock = Lock.make()
 			self.values = ContiguousArray(repeating: Placeholder.none, count: count)
@@ -1757,7 +1757,7 @@ extension Signal {
 		}
 	}
 
-	private final class ZipStrategy: SignalAggregateStrategy {
+	private class ZipStrategy: SignalAggregateStrategy {
 		private let stateLock: Lock
 		private let sendLock: Lock
 
@@ -1834,7 +1834,7 @@ extension Signal {
 			stateLock.unlock()
 		}
 
-		init(count: Int, action: @escaping (AggregateStrategyEvent) -> Void) {
+    required init(count: Int, action: @escaping (AggregateStrategyEvent) -> Void) {
 			self.values = ContiguousArray(repeating: [], count: count)
 			self.hasConcurrentlyCompleted = false
 			self.isCompleted = ContiguousArray(repeating: false, count: count)
@@ -1844,7 +1844,7 @@ extension Signal {
 		}
 	}
 
-	private final class AggregateBuilder<Strategy: SignalAggregateStrategy> {
+	private class AggregateBuilder<Strategy: SignalAggregateStrategy> {
 		fileprivate var startHandlers: [(_ index: Int, _ strategy: Strategy, _ action: @escaping (Signal<Never, Error>.Event) -> Void) -> Disposable?]
 
 		init() {

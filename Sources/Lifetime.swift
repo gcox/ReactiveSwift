@@ -2,7 +2,7 @@ import Foundation
 
 /// Represents the lifetime of an object, and provides a hook to observe when
 /// the object deinitializes.
-public final class Lifetime {
+public class Lifetime {
 	private let disposables: CompositeDisposable
 
 	/// A signal that sends a `completed` event when the lifetime ends.
@@ -96,7 +96,7 @@ extension Lifetime {
 	///		private let (lifetime, token) = Lifetime.make()
 	/// }
 	/// ```
-	public final class Token {
+	public class Token {
 		fileprivate let disposables: CompositeDisposable
 
 		public init() {

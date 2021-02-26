@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class Collect<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal class Collect<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<[Value], Error>
 		let modify: (_ collected: inout [Value], _ latest: Value) -> [Value]?
 

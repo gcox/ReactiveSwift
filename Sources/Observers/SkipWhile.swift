@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class SkipWhile<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal class SkipWhile<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let shouldContinueToSkip: (Value) -> Bool
 		var isSkipping = true

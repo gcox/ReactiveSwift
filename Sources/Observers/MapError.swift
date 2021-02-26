@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class MapError<Value, InputError: Swift.Error, OutputError: Swift.Error>: Observer<Value, InputError> {
+	internal class MapError<Value, InputError: Swift.Error, OutputError: Swift.Error>: Observer<Value, InputError> {
 		let downstream: Observer<Value, OutputError>
 		let transform: (InputError) -> OutputError
 

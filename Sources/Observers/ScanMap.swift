@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class ScanMap<Value, State, Result, Error: Swift.Error>: Observer<Value, Error> {
+	internal class ScanMap<Value, State, Result, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Result, Error>
 		let next: (inout State, Value) -> Result
 		var accumulator: State

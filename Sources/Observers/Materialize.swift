@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class Materialize<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal class Materialize<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Signal<Value, Error>.Event, Never>
 
 		init(downstream: Observer<Signal<Value, Error>.Event, Never>) {

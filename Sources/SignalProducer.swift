@@ -283,7 +283,7 @@ internal class SignalProducerCore<Value, Error: Swift.Error> {
 	}
 }
 
-private final class SignalCore<Value, Error: Swift.Error>: SignalProducerCore<Value, Error> {
+private class SignalCore<Value, Error: Swift.Error>: SignalProducerCore<Value, Error> {
 	private let _make: () -> Instance
 
 	init(_ action: @escaping () -> Instance) {
@@ -321,7 +321,7 @@ private final class SignalCore<Value, Error: Swift.Error>: SignalProducerCore<Va
 /// level of event transforms, without any `Signal` in between.
 ///
 /// - note: This core does not use `Signal` unless it is requested via `makeInstance()`.
-private final class TransformerCore<Value, Error: Swift.Error, SourceValue, SourceError: Swift.Error>: SignalProducerCore<Value, Error> {
+private class TransformerCore<Value, Error: Swift.Error, SourceValue, SourceError: Swift.Error>: SignalProducerCore<Value, Error> {
 	private let source: SignalProducerCore<SourceValue, SourceError>
 	private let transform: Signal<SourceValue, SourceError>.Event.Transformation<Value, Error>
 
@@ -407,7 +407,7 @@ private final class TransformerCore<Value, Error: Swift.Error, SourceValue, Sour
 /// without escaping the `Observer`.
 ///
 /// - note: This core does not use `Signal` unless it is requested via `makeInstance()`.
-private final class GeneratorCore<Value, Error: Swift.Error>: SignalProducerCore<Value, Error> {
+private class GeneratorCore<Value, Error: Swift.Error>: SignalProducerCore<Value, Error> {
 	private let isDisposable: Bool
 	private let generator: (Signal<Value, Error>.Observer, Disposable) -> Void
 

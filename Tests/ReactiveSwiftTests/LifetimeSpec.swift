@@ -92,14 +92,14 @@ final class LifetimeSpec: QuickSpec {
 	}
 }
 
-internal final class MutableReference<Value: AnyObject> {
+internal class MutableReference<Value: AnyObject> {
 	var value: Value?
 	init(_ value: Value?) {
 		self.value = value
 	}
 }
 
-internal final class TestObject {
+internal class TestObject {
 	private let token = Lifetime.Token()
 	var lifetime: Lifetime { return Lifetime(token) }
 

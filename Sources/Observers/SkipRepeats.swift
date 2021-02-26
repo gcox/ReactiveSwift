@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class SkipRepeats<Value, Error: Swift.Error>: Observer<Value, Error> {
+	internal class SkipRepeats<Value, Error: Swift.Error>: Observer<Value, Error> {
 		let downstream: Observer<Value, Error>
 		let isEquivalent: (Value, Value) -> Bool
 

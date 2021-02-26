@@ -1,5 +1,5 @@
 extension Operators {
-	internal final class Dematerialize<Event>: Observer<Event, Never> where Event: EventProtocol {
+	internal class Dematerialize<Event>: Observer<Event, Never> where Event: EventProtocol {
 		let downstream: Observer<Event.Value, Event.Error>
 
 		init(downstream: Observer<Event.Value, Event.Error>) {

@@ -479,7 +479,7 @@ extension SignalProducer {
 	}
 }
 
-private final class ConcurrentFlattenState<Value, Error: Swift.Error> {
+private class ConcurrentFlattenState<Value, Error: Swift.Error> {
 	typealias Producer = ReactiveSwift.SignalProducer<Value, Error>
 
 	/// The limit of active producers.
